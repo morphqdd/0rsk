@@ -47,6 +47,13 @@ class Rsk::AppTest < TestCase
     end
   end
 
+  def test_shows_login_in_header
+    login('bill')
+    get('/projects')
+    assert_equal(200, last_response.status, last_response.body)
+    assert_includes(last_response.body, '@bill', last_response.body)
+  end
+
   def test_user_pages
     login('bill')
     pages = [
